@@ -50,7 +50,8 @@ class Solution
             {
                 one++;
             }
-            else{
+            else
+            {
                 two++;
             }
             temp=temp->next;
@@ -70,12 +71,13 @@ class Solution
             }
             else
             {
-             temp->data=2;
-             two--;
+                temp->data=2;
+                two--;
             }
             temp=temp->next;
         }
         return head;
+        
     }
 };
 
