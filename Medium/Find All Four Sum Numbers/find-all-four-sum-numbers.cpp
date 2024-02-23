@@ -10,77 +10,33 @@ class Solution{
     public:
     // arr[] : int input array of integers
     // k : the quadruple sum required
-    vector<vector<int> > fourSum(vector<int> &nums, int target) {
-     
-    //      int n = nums.size(); //size of the array
-    // vector<vector<int>> ans;
-
-    // // sort the given array:
-    // sort(nums.begin(), nums.end());
-
-    // //calculating the quadruplets:
-    // for (int i = 0; i < n; i++) {
-    //     // avoid the duplicates while moving i:
-    //     if (i > 0 && nums[i] == nums[i - 1]) continue;
-    //     for (int j = i + 1; j < n; j++) {
-    //         // avoid the duplicates while moving j:
-    //         if (j > i + 1 && nums[j] == nums[j - 1]) continue;
-
-    //         // 2 pointers:
-    //         int k = j + 1;
-    //         int l = n - 1;
-    //         while (k < l) {
-    //             long long sum = nums[i];
-    //             sum += nums[j];
-    //             sum += nums[k];
-    //             sum += nums[l];
-    //             if (sum == target) {
-    //                 vector<int> temp = {nums[i], nums[j], nums[k], nums[l]};
-    //                 ans.push_back(temp);
-    //                 k++; l--;
-
-    //                 //skip the duplicates:
-    //                 while (k < l && nums[k] == nums[k - 1]) k++;
-    //                 while (k < l && nums[l] == nums[l + 1]) l--;
-    //             }
-    //             else if (sum < target) k++;
-    //             else l--;
-    //         }
-    //     }
-    // }
-
-    // return ans;
-     int n = nums.size();
-        sort(nums.begin(), nums.end());
-        set<vector<int>> st;
-        
+    vector<vector<int>> fourSum(vector<int> &arr, int T) {
+        sort(arr.begin(), arr.end());
+        int n = arr.size();
+        set<vector<int>> ans;
         for (int i = 0; i < n - 3; i++) {
             for (int j = i + 1; j < n - 2; j++) {
                 int k = j + 1;
                 int l = n - 1;
-                
                 while (k < l) {
-                    long long sum = static_cast<long long>(nums[i]) + nums[j] + nums[k] + nums[l];
-                    
-                    if (sum == target) {
-                        vector<int> temp = {nums[i], nums[j], nums[k], nums[l]};
-                        st.insert(temp);
+                    int sum = arr[i] + arr[j] + arr[k] + arr[l];
+                    if (sum == T) {
+                        vector<int> s = { arr[i], arr[j], arr[k], arr[l] };
+                        ans.insert(s);
                         k++;
                         l--;
-                    } else if (sum < target) {
+                    } else if (sum < T) {
                         k++;
-                    } else {
+                    } else { // sum > T
                         l--;
                     }
                 }
             }
         }
-        
-        vector<vector<int>> ans(st.begin(), st.end());
-        return ans;
+        vector<vector<int>> res(ans.begin(), ans.end());
+        return res;
     }
 };
-
 
 //{ Driver Code Starts.
 int main() {
