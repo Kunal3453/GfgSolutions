@@ -4,31 +4,28 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution {
   public:
     int totalFruits(int N, vector<int> &fruits) {
-        map<int,int>mpp;
-        int i=0,j=0;
-        int maxi=0;
+        unordered_map<int,int>mpp;
+        int i=0,j=0,ans=0;
         while(j<N)
         {
             mpp[fruits[j]]++;
             while(mpp.size()>2)
             {
-                if(mpp[fruits[i]]==1)
+                mpp[fruits[i]]--;
+                if(mpp[fruits[i]]==0)
                 {
                     mpp.erase(fruits[i]);
                 }
-                else
-                {
-                    mpp[fruits[i]]--;
-                }
                 i++;
             }
-            maxi=max(maxi,j-i+1);
+            ans=max(ans,j-i+1);
             j++;
         }
-        return maxi;
+        return ans;
     }
 };
 
